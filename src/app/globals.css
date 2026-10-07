@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #08090e;
+  --color-surface: #11131c;
+  --color-raised: #161926;
+  --color-edge: rgba(255, 255, 255, 0.08);
+  --color-ink: #e8e6e1;
+  --color-mute: #9ba0ab;
+  --color-faint: #5a5f6b;
+  --color-amber: #f0b25a;
+  --color-amber-bright: #ffc670;
+  --color-jade: #4ad8a5;
+  --color-signal: #f0645a;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  --animate-shimmer: shimmer 1.8s linear infinite;
+  --animate-rise: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-blink: blink 1.4s ease-in-out infinite;
+
+  @keyframes shimmer {
+    0% {
+      background-position: -400px 0;
+    }
+    100% {
+      background-position: 400px 0;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(240, 178, 90, 0.28);
+  color: #fff7ea;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2e3d transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #2a2e3d;
+  border-radius: 8px;
+}
+
+.hairline {
+  border-color: var(--color-edge);
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.09) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 800px 100%;
+  animation: var(--animate-shimmer);
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+input:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(240, 178, 90, 0.55);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
